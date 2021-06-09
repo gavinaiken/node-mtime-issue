@@ -10,7 +10,7 @@ const scriptFiles = [
 ];
 
 const mtimeDecimals = [
-    0.111,
+    0.3147,
     0.500,
     0.711
 ];
@@ -30,6 +30,7 @@ function set() {
     scriptFiles.forEach((scriptFile, idx) => {
         const filePath = path.join(srcDir, scriptFile);
         let srcStats = fs.statSync(filePath);
+        // console.log(typeof srcStats.atime, typeof srcStats.atimeMs, srcStats.atime instanceof Date, srcStats.atime.getTime(), srcStats.atimeMs)
         fs.utimesSync(filePath, srcStats.atimeMs / 1000, (Math.floor(srcStats.mtimeMs) + mtimeDecimals[idx]) / 1000);
     });
 }
